@@ -1,0 +1,3 @@
+### Nicole
+
+I worked on the Homepage (index.html) for this lab that includes our team name, logo and motto. Since designing the UI for this page was relatively simple compared to the other pages, I also designed the menu bar along the top. I had some difficulties in making sure the logo and the menu scaled well wth resizing the screen, but figuring out how to resize based on the window size helped, especially for adjusting the font size. We had a few issues when merging all our branches together that some of our CSS elements conflicted, but in the end we were able to communicate well during our meeting to fix everything. I thought we all worked together well!
