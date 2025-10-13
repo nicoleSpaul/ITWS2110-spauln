@@ -6,3 +6,9 @@ https://www.w3schools.com/css/css3_flexbox.asp
 
 https://www.w3schools.com/css/css_inline-block.asp
 
+APIs:
+OpenWeather
+https://openweathermap.org/api
+
+NASA CAD
+https://ssd-api.jpl.nasa.gov/doc/cad.html
