@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Actor&family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.quantico-regular {
+  font-family: "Quantico", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.quantico-bold {
+  font-family: "Quantico", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.quantico-regular-italic {
+  font-family: "Quantico", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.quantico-bold-italic {
+  font-family: "Quantico", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+body {
+  padding: 0%;
+  font-family: "Karla", sans-serif;
+  background-color: black;
+  color: white;
+  width: 100%;
+  margin: 0%;
+
+}
+
+#bgimg {
+  padding-top: 100px;
+  padding-bottom: 200px;
+  background-image: url(images/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: -30vh;
+  z-index: -1;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 40vw;
+  margin-left: 30vw;
+  margin-top: 30px;
+  background-color: rgba(28, 28, 28, 0.4);
+
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  padding-top: 15px;
+  padding-bottom: 70px;
+  padding-right: 0%;
+  padding-left: 0%;
+  z-index: 1;
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid greenyellow;
+  width: 50vw;
+  margin-left: 30vw;
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  padding: 0;
+  z-index: 1;
+}
+
+.listItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 10px;
+  font-size: 1vw;
+  z-index: 1;
+}
+
+.miniHeading {
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.5vw;
+  z-index: 1;
+}
+
+.imgFormat {
+  width: 90%;
+}
+
+
+#nav-bar {
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  height: 100px;
+  background: rgb(14, 18, 27);
+  z-index: 1;
+}
+
+#off-set {
+  display: inline-block;
+  position: relative;
+  width: 40vw;
+  z-index: 1;
+}
+
+
+#nav-bar ul {
+  margin: 0%;
+  list-style: none;
+  align-items: center;
+  z-index: 1;
+}
+
+#menu {
+  position: fixed;
+  margin: 0%;
+  padding: 0%;
+  z-index: 1;
+}
+
+#nav-bar ul li.menu-item {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 20vw;
+  height: 100px;
+  text-align: center;
+  z-index: 1;
+
+}
+
+#nav-bar ul li.menu-item p {
+  all: unset;
+  font-family: "Quantico", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5vw;
+  padding: 0%;
+  margin: 0%;
+  display: inline-block;
+  margin-top: calc(50px - 1vw);
+  z-index: 1;
+}
+
+.star-icon {
+  width: 10%;
+  aspect-ratio: 1/1;
+  z-index: 1;
+}
+
+.top-star {
+  width: 10%;
+  aspect-ratio: 1/1;
+  margin-top: calc(50px - 0.8vw);
+  z-index: 1;
+}
+
+.top-star,
+#nav-bar ul li.menu-item p {
+  vertical-align: middle;
+  z-index: 1;
+}
