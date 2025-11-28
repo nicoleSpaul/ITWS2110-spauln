@@ -5,3 +5,7 @@ For this lab I assumed question 8 meant order by all categories alphabetically, 
 NOTE: 
 
 commands.txt is a copy of the SQL commands + which part they are for, to see a better formatted version please see the Lab8Database&Commands.docx to see BOTH the text of structure/content of database AND the commands/output section.
+
+
+GitHub Link:
+https://github.com/nicoleSpaul/ITWS2110-spauln/tree/main/lab8
