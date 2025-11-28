@@ -98,10 +98,10 @@ class Division extends Operation {
     if (isset($_POST['sub']) && $_POST['sub'] == 'Subtract') {
       $op = new Subtraction($o1, $o2);
     }
-    if (isset($_POST['mult']) && $_POST['mult'] == 'Multiplication') {
+    if (isset($_POST['mult']) && $_POST['mult'] == 'Multiply') {
       $op = new Multiplication($o1, $o2);
     }
-    if (isset($_POST['div']) && $_POST['div'] == 'Division') {
+    if (isset($_POST['div']) && $_POST['div'] == 'Divide') {
       $op = new Division($o1, $o2);
     }
 
@@ -186,7 +186,7 @@ to determine which button has been pressed and take the appropriate action
     } 
   ?>
   </pre>
-  <form method="post" action="lab6start.php">
+  <form method="post" action="lab6.php">
     <input type="text" name="op1" id="name" value="" />
     <input type="text" name="op2" id="name" value="" />
     <br/>

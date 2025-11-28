@@ -1,0 +1,161 @@
+PART 1 **************************************
+
+--- 
+
+1. Make courses table:
+
+CREATE TABLE courses (
+    crn INT(11) PRIMARY KEY,
+    prefix VARCHAR(4) NOT NULL,
+    number SMALLINT(4) NOT NULL,
+    title VARCHAR(255) NOT NULL
+) 
+COLLATE = utf8_unicode_ci;
+
+--- 
+
+2. Make students table:
+
+CREATE TABLE students (
+    rin INT(9) PRIMARY KEY,
+    rcsID CHAR(7),
+    `first name` VARCHAR(100) NOT NULL,
+    `last name` VARCHAR(100) NOT NULL,
+    alias VARCHAR(100) NOT NULL,
+    phone INT(10)
+)
+CHARACTER SET utf8
+COLLATE utf8_unicode_ci;
+
+
+PART 2 ***********************************
+
+1. add address fields to the students table:
+
+ALTER TABLE students
+ADD COLUMN street VARCHAR(255),
+ADD COLUMN city VARCHAR(100),
+ADD COLUMN state CHAR(2),
+ADD COLUMN zip CHAR(10);
+
+---
+
+2. Add section and year fields to the courses table
+
+ALTER TABLE courses
+ADD COLUMN section VARCHAR(10),
+ADD COLUMN year YEAR;
+
+---
+
+3. CREATE a grades table
+
+CREATE TABLE IF NOT EXISTS grades (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    crn INT(11) NOT NULL,
+    rin INT(9) NOT NULL,
+    grade INT(3) NOT NULL,
+    FOREIGN KEY (crn) REFERENCES courses(crn),
+    FOREIGN KEY (rin) REFERENCES students(rin)
+)
+CHARACTER SET utf8
+COLLATE utf8_unicode_ci;
+
+---
+
+4. INSERT at least 4 courses into the courses table:
+
+INSERT INTO courses (crn, prefix, number, title) VALUES
+(37514, 'CSCI', 1100, 'Introduction to Computer Science'),
+(37730, 'MATH', 2010, 'Multivar Calculus & Matrix Algebra'),
+(73048, 'ITWS', 2110, 'Web Systems Development'),
+(35797, 'PHYS', 1100, 'Physics I');
+
+---
+
+5. INSERT at least 4 students into the students table:
+
+INSERT INTO students (RIN, RCSID, `first name`, `last name`, alias, phone, street, city, state, zip) VALUES 
+(662057099, 'wongp4', 'Priscilla', 'Wong', 'priscilla', 1231231231, '1 College Ave', 'Troy', 'NY', '12180'), 
+(662057098, 'sitc', 'Courteney', 'Sit', 'courteney', 1231231232, '2 College Ave', 'Troy', 'NY', '12180'),
+(662057097, 'spauln', 'Nicole', 'Spaulding', 'nicole', 1231231233, '3 College Ave', 'Troy', 'NY', '12180'), 
+(662057096, 'siongd', 'Dana', 'Siong Sin', 'dana', 1231231234, '4 College Ave', 'Troy', 'NY', '12180');
+
+---
+
+6. ADD 10 grades into the grades table:
+
+INSERT INTO grades (crn, RIN, grade)
+VALUES
+(37514, 662057099, 94),
+(37730, 662057098, 88),
+(73048, 662057097, 91),
+(35797, 662057096, 85),
+(37730, 662057099, 82),
+(35797, 662057098, 79),
+(35797, 662057097, 89),
+(37514, 662057096, 94),
+(73048, 662057099, 87),
+(73048, 662057098, 92);
+
+---
+
+7. list all students in the following sequences; in alphabetical order by rin, last name, RCSid, and firstname
+
+SELECT * FROM students ORDER BY RIN, `last name`, RCSID, `first name`;
+
+rin	rcsID	first name   	last name   	alias	phone	street	city	state	zip	
+662057096	siongd	Dana	Siong Sin	dana	1231231234	4 College Ave	Troy	NY	12180	
+662057097	spauln	Nicole	Spaulding	nicole	1231231233	3 College Ave	Troy	NY	12180	
+662057098	sitc	Courteney	Sit	    courteney	1231231232	2 College Ave	Troy	NY	12180	
+662057099	wongp4	Priscilla	Wong	priscilla	1231231231	1 College Ave	Troy	NY	12180	
+
+
+---
+
+8. list all students rin, name and address if their grade in any course was higher than a 90
+
+SELECT DISTINCT s.RIN, s.`first name`, s.`last name`, s.street, s.city, s.state, s.zip
+FROM students s
+JOIN grades g ON s.RIN = g.RIN
+WHERE g.grade > 90;
+
+
+RIN	first name	last name	street	city	state	zip	
+662057099	Priscilla	Wong	1 College Ave	Troy	NY	12180	
+662057097	Nicole	Spaulding	3 College Ave	Troy	NY	12180	
+662057096	Dana	Siong Sin	4 College Ave	Troy	NY	12180	
+662057098	Courteney	Sit	    2 College Ave	Troy	NY	12180	
+
+---
+
+9. list out the average grade in each course
+
+SELECT c.title, AVG(g.grade) AS average_grade
+FROM grades g
+JOIN courses c ON g.crn = c.crn
+GROUP BY c.crn;
+
+
+title	average_grade	
+Physics I	                        84.3333	
+Introduction to Computer Science	94.0000	
+Multivar Calculus & Matrix Algebra	85.0000	
+Web Systems Development	            90.0000	
+
+---
+
+10. list out the number of students in each course
+
+SELECT c.title, COUNT(DISTINCT g.RIN) AS num_students
+FROM grades g
+JOIN courses c ON g.crn = c.crn
+GROUP BY c.crn;
+
+
+title	num_students	
+Physics I	                        3	
+Introduction to Computer Science	2	
+Multivar Calculus & Matrix Algebra	2	
+Web Systems Development	            3	
+
