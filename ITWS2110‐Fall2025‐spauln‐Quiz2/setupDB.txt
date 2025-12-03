@@ -1,0 +1,42 @@
+CREATE TABLE users (
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    nickName VARCHAR(100),
+    passwordHash VARCHAR(255) NOT NULL,
+    salt VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE projects (
+    projectId INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE projectMembership (
+    projectId INT NOT NULL,
+    memberId INT NOT NULL,
+    
+    PRIMARY KEY (projectId, memberId),
+
+    FOREIGN KEY (projectId) REFERENCES projects(projectId)
+        ON DELETE CASCADE,
+    FOREIGN KEY (memberId) REFERENCES users(userId)
+        ON DELETE CASCADE
+);
+
+
+INSERT INTO users (firstName, lastName, nickName, passwordHash, salt) VALUES
+('Alice', 'Smith', 'Ally', 'hash1', 'salt1'),
+('Bob', 'Johnson', 'Bobby', 'hash2', 'salt2'),
+('Charlie', 'Williams', 'Chuck', 'hash3', 'salt3'),
+('Diana', 'Brown', 'Di', 'hash4', 'salt4'),
+('Ethan', 'Jones', 'E', 'hash5', 'salt5'),
+('Fiona', 'Garcia', 'Fi', 'hash6', 'salt6'),
+('George', 'Miller', 'Geo', 'hash7', 'salt7'),
+('Hannah', 'Davis', 'Han', 'hash8', 'salt8'),
+('Ian', 'Martinez', 'I', 'hash9', 'salt9'),
+('Julia', 'Lopez', 'Jules', 'hash10', 'salt10'),
+('Kevin', 'Wilson', 'Kev', 'hash11', 'salt11'),
+('Laura', 'Anderson', 'Lau', 'hash12', 'salt12');
+

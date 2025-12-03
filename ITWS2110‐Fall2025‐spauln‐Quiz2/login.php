@@ -1,0 +1,71 @@
+
+
+<?php
+session_start();
+
+// Connect to the database
+require_once 'dbConnect.php';
+
+//login
+if (isset($_POST['login']) && $_POST['login'] == 'Login') {
+  $salt_stmt = $dbconn->prepare('SELECT salt FROM users WHERE userId=:userId');
+  $salt_stmt->execute(array(':userId' => $_POST['userId']));
+  $res = $salt_stmt->fetch();
+  $salt = ($res) ? $res['salt'] : '';
+  $salted = hash('sha256', $salt . $_POST['passwordHash']);
+  
+  $login_stmt = $dbconn->prepare('SELECT userId, nickName FROM users WHERE userId=:userId AND passwordHash=:passwordHash');
+  $login_stmt->execute(array(':userId' => $_POST['userId'], ':passwordHash' => $salted));
+  
+  
+  if ($user = $login_stmt->fetch()) {
+    $_SESSION['userId'] = $user['userId'];
+    $_SESSION['nickName'] = $user['nickName']; 
+    header("Location: index.php");
+    exit();
+  } else {
+    header("Location: register.php");
+    exit();
+  }
+}
+
+// Logout
+if (isset($_SESSION['userId']) && isset($_POST['logout']) && $_POST['logout'] == 'Logout') {
+  // Unset the keys from the superglobal
+  unset($_SESSION['userId']);
+  unset($_SESSION['nickName']);
+  // Destroy the session cookie for this session
+  setcookie(session_name(), '', time() - 72000);
+  // Destroy the session data store
+  session_destroy();
+  $err = 'You have been logged out.';
+}
+
+?>
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <?php if (isset($_SESSION['userId'])): ?>
+  <h1>Welcome, <?php echo htmlentities($_SESSION['userId']) ?></h1>
+  <form method="post" action="login.php">
+    <input name="logout" type="submit" value="Logout" />
+  </form>
+  <?php else: ?>
+  <h1>Login</h1>
+  <?php if (isset($err)) echo "<p>$err</p>" ?>
+  <form method="post" action="login.php">
+    <label for="userId">userId: </label><input type="text" name="userId" />
+    <label for="passwordHash">password: </label><input type="password" name="passwordHash" />
+    <input name="login" type="submit" value="Login" />
+  </form>
+  <?php endif; ?>
+</body>
+</html>
